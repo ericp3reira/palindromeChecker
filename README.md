@@ -1,2 +1,2 @@
 # palindromechecker
-A palindrome checker
+An AngularJS palindrome checker
