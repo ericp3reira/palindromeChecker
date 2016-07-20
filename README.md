@@ -1,0 +1,2 @@
+# palindromechecker
+A palindrome checker
