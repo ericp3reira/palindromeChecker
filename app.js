@@ -1,18 +1,19 @@
 angular.module('palindromeChecker', [])
-.controller('MainCtrl', ['$scope',function($scope){
+.controller('MainCtrl', function($scope){  
   $scope.words = [  ];
+  var isPalindrome = function(word) {
+    let titleNorm = word.toLowerCase().replace(/[^a-zA-Z0-9]+/g, "");
+    let titleRev = titleNorm.split("").reverse().join("");
+    return (titleNorm === titleRev) ? true : false;
+  };
   $scope.addWord = function(){
     if(!$scope.title || $scope.title === '') { return; }
-    
-    $scope.title2 =       $scope.title.toLowerCase().replace(/[^a-zA-Z0-9]+/g, "");
-    
-    $scope.reversed = $scope.title2.split("").reverse().join("");
-    if($scope.title2 === $scope.reversed) {
-      $scope.words.push({title: $scope.title, result: ' is a palindrome'});
-      $scope.title = "";
-    } else {
-      $scope.words.push({title: $scope.title, result: ' is not a palindrome'});
-      $scope.title = "";
-    }
+    $scope.words.push({title: $scope.title, result: isPalindrome($scope.title) ? 'is a palindrome' : 'is not a palindrome'});
+    $scope.title = "";
   };
-}]);
+})
+.filter('reverse', function() {
+  return function(items) {
+    return items.slice().reverse();
+  }
+});
